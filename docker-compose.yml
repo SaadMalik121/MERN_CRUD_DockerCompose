@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  frontend:
+    image: saadmalik813/front-end
+    ports:
+      - 3000:3000
+
+  backend:
+    image: saadmalik813/back-end
+    ports:
+      - 4200:4200
+    environment:
+      - mongoURL=mongodb://mongo:27017/CrudDB
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4.0-xenial
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
